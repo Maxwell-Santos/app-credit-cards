@@ -1,50 +1,50 @@
 export default [
   {
-    month:'janeiro',
+    name:'janeiro',
     quotes: [],
   },
   {
-    month:'fevereiro',
+    name:'fevereiro',
     quotes: [],
   },
   {
-    month:'março',
+    name:'março',
     quotes: [],
   },
   {
-    month:'abril',
+    name:'abril',
     quotes: [],
   },
   {
-    month:'maio',
+    name:'maio',
     quotes: [],
   },
   {
-    month:'junho',
+    name:'junho',
     quotes: [],
   },
   {
-    month:'julho',
+    name:'julho',
     quotes: [],
   },
   {
-    month:'agosto',
+    name:'agosto',
     quotes: [],
   },
   {
-    month:'setembro',
+    name:'setembro',
     quotes: [],
   },
   {
-    month:'outubro',
+    name:'outubro',
     quotes: [],
   },
   {
-    month:'novembro',
+    name:'novembro',
     quotes: [],
   },
   {
-    month:'dezembro',
+    name:'dezembro',
     quotes: [],
   },
 ]

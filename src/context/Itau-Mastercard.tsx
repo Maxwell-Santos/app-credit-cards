@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { BuyProps } from "../interface/BuyInterface";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import months from "../utils/months";
+import { monthsUpdate } from "../utils/checkMonth";
+import monthsMastercard from "../utils/monthsMastercard";
 
 export const ItauMContext = createContext<any>({})
 
@@ -13,11 +13,7 @@ export function ItauMProvider({ children }) {
     validity: '26/10',
   })
 
-  const cloneMonths = [...months]
-  // console.log(cloneMonths)
-
-
-  const [buys, setBuys] = useState<BuyProps[]>([])
+  const [buys, setBuys] = useState(monthsMastercard)
 
   /**
    * IMPORTANTE PARA O FUNCIONAMENTO DO CÓDIGO 
@@ -28,10 +24,10 @@ export function ItauMProvider({ children }) {
   /**
    * IMPORTANTE PARA O FUNCIONAMENTO DO CÓDIGO 
   */
+   const AddNewBuy = (data) => {
+    // setBuys(prev => [...prev, data])
 
-  const AddNewBuy = (data) => {
-    setBuys(prev => [...prev, data])
-
+    setBuys(monthsUpdate(data, monthsMastercard))
     SetLocalValue(buys)
   }
 

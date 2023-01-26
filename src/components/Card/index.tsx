@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import * as Styled from './styles'
 
 interface CardProps {
@@ -13,7 +13,6 @@ export function Card({
   validity,
   limit,
   available,
-
 }: CardProps) {
 
   return (

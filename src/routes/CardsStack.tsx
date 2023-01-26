@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
-import { ItauMastercard } from "../pages/Cards/ItauMastercard/provider"
-import { ItauVisa } from "../pages/Cards/ItauVisa/provider"
-import { Rico } from "../pages/Cards/Rico/provider"
+import { ItauMastercard } from "../pages/Cards/ItauMastercard"
+import { ItauVisa } from "../pages/Cards/ItauVisa"
+import { Rico } from "../pages/Cards/Rico"
 
 const Stack = createMaterialTopTabNavigator()
 

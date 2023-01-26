@@ -3,6 +3,6 @@ export interface BuyProps {
   price: number,
   quantityQuota: number, //quantidade de parcelas
   valueQuota: number, //quantidade de parcelas
-  date: Date | string,
+  date: string,
   description?: string,
 }

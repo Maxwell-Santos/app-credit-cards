@@ -36,7 +36,7 @@ export function FormAddBuy() {
   const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate
     setDate(currentDate)
-    setValue('date', date)
+    setValue('date', currentDate)
   }
 
   const showMode = (currentMode) => {
@@ -82,6 +82,8 @@ export function FormAddBuy() {
     if (bankName == 'itau-mastercard') ITAU_M.AddNewBuy(data)
     if (bankName == 'itau-visa') ITAU_V.AddNewBuy(data)
     if (bankName == 'rico') RICO.AddNewBuy(data)
+
+
   }
   // PARTE EXTREMAMENTE SENSÍVEL DO CÓDIGO
 
@@ -110,6 +112,7 @@ export function FormAddBuy() {
               <Styled.Text>titulo</Styled.Text>
               <Styled.Input
                 onChangeText={(value) => setValue('title', value)}
+                maxLength={25}
               />
             </View>
 
@@ -198,19 +201,21 @@ export function FormAddBuy() {
             </View>
 
             <View style={style.SubmitContent}>
-              <Styled.Submit onPress={handleSubmit(ValuesToSubmit)}>
-                <Styled.TextButton>Enviar</Styled.TextButton>
-              </Styled.Submit>
+              <Styled.Submit
+                onPress={handleSubmit(ValuesToSubmit)}
+              >
+              <Styled.TextButton>Enviar</Styled.TextButton>
+            </Styled.Submit>
 
-              <Styled.Reset onPress={() => reset()}>
-                <Styled.TextButton>Resetar</Styled.TextButton>
-              </Styled.Reset>
-            </View>
-          </Styled.ContainerInputs>
+            <Styled.Reset onPress={() => reset()}>
+              <Styled.TextButton>Resetar</Styled.TextButton>
+            </Styled.Reset>
+          </View>
+        </Styled.ContainerInputs>
 
-        </Styled.Container>
-      </Styled.TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+      </Styled.Container>
+    </Styled.TouchableWithoutFeedback>
+    </KeyboardAvoidingView >
   )
 }
 
@@ -244,8 +249,8 @@ const style = StyleSheet.create({
 
   SubmitContent: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'flex-end',
+    justifyContent: 'center',
     flexDirection: 'row-reverse',
   }
 })

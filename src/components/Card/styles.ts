@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 
 export const Card = styled.View`
   background-color: ${({ theme }) => theme.BACKGROUND.CARD};
-  padding: 40px;
+  padding: 70px 20px 40px 20px;
 `;
 
 export const Title = styled.Text`

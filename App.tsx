@@ -9,6 +9,9 @@ import dark from './src/theme/dark';
 
 import * as LocalAuthentication from 'expo-local-authentication';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { RicoProvider } from './src/context/Rico';
+import { ItauVProvider } from './src/context/ItauVIsa';
+import { ItauMProvider } from './src/context/Itau-Mastercard';
 
 
 export default function App() {
@@ -53,11 +56,20 @@ export default function App() {
     <>
       <SafeAreaView />
       <NativeBaseProvider>
-        <StatusBar barStyle='default' backgroundColor={"#121212"} />
         <ThemeProvider theme={dark}>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <Routes />
-          </GestureHandlerRootView>
+
+          <RicoProvider>
+            <ItauVProvider>
+              <ItauMProvider>
+
+                <GestureHandlerRootView style={{ flex: 1 }}>
+                  <Routes />
+                </GestureHandlerRootView>
+
+              </ItauMProvider>
+            </ItauVProvider>
+          </RicoProvider>
+          
         </ThemeProvider>
       </NativeBaseProvider>
     </>

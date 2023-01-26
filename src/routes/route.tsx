@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { FormAddBuy } from "../pages/FormAddBuy/provider";
+import { FormAddBuy } from "../pages/FormAddBuy";
 import { Index } from "../pages/Home";
 import { CardsStack } from "./CardsStack";
 

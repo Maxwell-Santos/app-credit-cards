@@ -83,8 +83,7 @@ export const TextButton = styled.Text`
 export const Reset = styled.TouchableOpacity`
   border: 1px solid #f00;
   border-radius: 10px;
-  /* flex: .6; */
-  width: 100%;
+  flex: .6;
   height: 50px;
   justify-content: center;
   margin-right: 18px;

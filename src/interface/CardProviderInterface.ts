@@ -1,8 +1,9 @@
 import {BuyProps} from "./BuyInterface"
 import CardContext from "./CardContext";
+import months from "../utils/monthVisa";
 
 export default interface CardProviderInterface {
-  buys: BuyProps[];
+  buys: typeof months;
   AddNewBuy: (data: BuyProps) => void;
 
   card: CardContext;

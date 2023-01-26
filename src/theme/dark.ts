@@ -16,7 +16,8 @@ export default {
     TEXT_CARD: '#FFF',
     TEXT_TAG_DESCRIPTION: '#dadada',
 
-    TEXT_TAG: '#FFF'
+    TEXT_TAG: '#FFF',
+    TITLE_MONTH: '#fff',
   },
   BORDER: {
     INPUT: '#585858'
