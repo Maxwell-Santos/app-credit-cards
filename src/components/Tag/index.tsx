@@ -26,7 +26,7 @@ export function Tag({
         console.log(`Duração: ${event.duration} ms.`);
         bg.value = withTiming("#27d327c5");
 
-        Vibration.vibrate()
+        // Vibration.vibrate()
 
       }
     })

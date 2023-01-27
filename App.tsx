@@ -55,6 +55,7 @@ export default function App() {
   return (
     <>
       <SafeAreaView />
+      <StatusBar barStyle='default'/>
       <NativeBaseProvider>
         <ThemeProvider theme={dark}>
 
