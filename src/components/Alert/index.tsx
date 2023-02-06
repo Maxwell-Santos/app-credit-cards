@@ -5,15 +5,15 @@ import { StyleSheet, Text, View } from "react-native";
 export function Alert() {
   return (
     <NBAlert
-      w={300}
+      w={250}
       status={"warning"}
       colorScheme={"warning"}
-      variant={"outline-light"}
+      variant={"outline"}
       style={styles.Alert}
     >
       <View style={styles.AlertContent}>
         <NBAlert.Icon />
-        <Text style={styles.TextAlert}>Falta preencher o preço do produto</Text>
+        <Text style={styles.TextAlert}>Preencha todos os campos</Text>
       </View>
     </NBAlert>
   )
@@ -23,7 +23,7 @@ export function Alert() {
 const styles = StyleSheet.create({
   Alert: {
     position: 'absolute',
-    top: 30,
+    top: 45,
     right: 25,
     zIndex: 2,
     opacity: .8

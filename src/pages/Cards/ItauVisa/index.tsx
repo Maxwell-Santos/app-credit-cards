@@ -12,6 +12,7 @@ export function ItauVisa() {
   const {
     card,
     buys,
+    resultado
   }: CardProviderInterface = useContext(ItauVContext)
 
   return (
@@ -21,10 +22,11 @@ export function ItauVisa() {
         validity={card.validity}
         limit={card.limit}
         available={card.available}
+        result={resultado}
       />
       <Styled.MonthsContainer>
 
-        {
+      { buys ?
           buys.map((month, index) => (
             <View key={index}>
 
@@ -39,14 +41,15 @@ export function ItauVisa() {
                       price={buy.price}
                       date={buy.date}
                       quantityQuota={buy.quantityQuota}
-                      valueQuota={buy.valueQuota}
+                      priceQuota={buy.priceQuota}
                       description={buy.description || 'tem descrição não'}
                     />
                   ))
                 }
               </Styled.Month>
             </View>
-          ))
+
+          )) : <Text style={{color: '#fff'}}>Até o memento, sem compras</Text>
         }
       </Styled.MonthsContainer>
 

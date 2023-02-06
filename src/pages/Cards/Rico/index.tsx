@@ -11,6 +11,7 @@ export function Rico() {
   const {
     card,
     buys,
+    resultado
   }: CardProviderInterface = useContext(RicoContext)
 
   return (
@@ -20,13 +21,14 @@ export function Rico() {
         validity={card.validity}
         limit={card.limit}
         available={card.available}
+        result={resultado}
       />
       <Styled.MonthsContainer>
 
-        {
+        {buys ?
           buys.map((month, index) => (
             <View key={index}>
-              
+
               <Styled.TitleMonth>{month.name}</Styled.TitleMonth>
 
               <Styled.Month>
@@ -38,14 +40,15 @@ export function Rico() {
                       price={buy.price}
                       date={buy.date}
                       quantityQuota={buy.quantityQuota}
-                      valueQuota={buy.valueQuota}
+                      priceQuota={buy.priceQuota}
                       description={buy.description || 'tem descrição não'}
                     />
                   ))
                 }
               </Styled.Month>
             </View>
-          ))
+
+          )) : <Text style={{ color: '#fff' }}>Até o memento, sem compras</Text>
         }
       </Styled.MonthsContainer>
 

@@ -13,8 +13,8 @@ export function CardsStack() {
         tabBarStyle: { display: 'none' } //Esconder a tabbar
       }}
     >
-      <Stack.Screen name="itau-mastercard" component={ItauMastercard} />
       <Stack.Screen name="itau-visa" component={ItauVisa} />
+      <Stack.Screen name="itau-mastercard" component={ItauMastercard} />
       <Stack.Screen name="rico" component={Rico} />
 
     </Stack.Navigator>

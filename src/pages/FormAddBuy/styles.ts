@@ -15,8 +15,7 @@ export const Container = styled.View`
 
 export const ContainerInputs = styled.View`
   flex: 1;
-  margin-top: 10%;
-  /* justify-content: center; */
+  margin-top: 20%;
 `;
 
 export const Text = styled.Text`
@@ -40,7 +39,6 @@ export const Input = styled.TextInput`
 export const Selection = styled.View`
   color: ${({ theme }) => theme.COLOR.PRIMARY};
   background: ${({ theme }) => theme.BACKGROUND.INPUT};
-  /* padding: 16px 20px; */
   margin-bottom: 20px;
   border-radius: 10px;
   width: 100%;
@@ -72,8 +70,14 @@ border-radius: 10px;
 justify-content: center;
 `;
 
-export const TextButton = styled.Text`
-  color: ${({ theme }) => theme.COLOR.BUTTON };
+interface Text {
+  readonly submit?: boolean;
+}
+
+export const TextButton = styled.Text<Text>`
+  color: ${props => props.submit ? 
+  ({ theme }) => theme.COLOR.BUTTON :
+  ({ theme }) => theme.COLOR.BUTTON_RESET};
   font-size: 18px;
   text-align: center;
   text-transform: capitalize;

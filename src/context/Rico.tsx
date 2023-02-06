@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { monthsUpdate } from "../utils/checkMonth";
 import monthsRico from "../utils/monthsRico";
 
@@ -14,7 +14,8 @@ export function RicoProvider({ children }) {
     validity: '26/10',
   })
 
-  const [buys, setBuys] = useState([])
+  const [buys, setBuys] = useState(monthsRico)
+  const [resultado, setResultados] = useState(0)
 
   /**
  * IMPORTANTE PARA O FUNCIONAMENTO DO CÓDIGO 
@@ -66,6 +67,15 @@ export function RicoProvider({ children }) {
   const UpdateAvailableCard = (newAvailable) => {
     setCard(card => card.available = newAvailable)
   }
+  
+  let a = []
+  useMemo(() => {
+    buys.map(item => {
+      item.quotes.map(item => a.push(item.priceQuota))
+      let b = a.reduce((prev, curr) => prev + curr, 0)
+      setResultados(b)
+    })
+  },[buys])
 
   return (
     <RicoContext.Provider value={{
@@ -76,6 +86,7 @@ export function RicoProvider({ children }) {
 
       SetLocalValue,
       GetLocalValue,
+      resultado
     }}>
 
 

@@ -1,36 +1,49 @@
-import { NativeBaseProvider } from 'native-base';
+import { Icon, IconButton, NativeBaseProvider } from 'native-base';
 import { useEffect, useState } from 'react';
-import { Alert, StatusBar } from 'react-native';
+import { Alert, StatusBar, StyleSheet, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeProvider } from 'styled-components/native';
 import { Routes } from './src/routes/route';
 import dark from './src/theme/dark';
+import light from './src/theme/light';
 
-import * as LocalAuthentication from 'expo-local-authentication';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RicoProvider } from './src/context/Rico';
 import { ItauVProvider } from './src/context/ItauVIsa';
 import { ItauMProvider } from './src/context/Itau-Mastercard';
+import { useFonts } from 'expo-font';
 
+import {
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter'
+
+import { themeNB } from './src/theme/NativeBase';
+import { Feather, FontAwesome } from '@expo/vector-icons';
+import { Authenticate } from './src/components/Authenticate';
+import * as LocalAuthentication from 'expo-local-authentication';
+import { useTheme } from "styled-components";
 
 export default function App() {
+  const theme = useTheme()
+
   const [supportedBiometric, setSupportedBiometric] = useState(false)
   const [authenticated, setAuthenticated] = useState(false)
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const compatible = await LocalAuthentication.hasHardwareAsync()
-  //     setSupportedBiometric(compatible)
-  //   })()
+  const [isDarkTheme, setIsDarkTheme] = useState(false)
+  const [nameIcon, setNameIcon] = useState('sun-o')
 
-  //   supportedBiometric && handleBiometricAuth()
-  // })
+  useEffect(() => {
+    (async () => {
+      const compatible = await LocalAuthentication.hasHardwareAsync()
+      setSupportedBiometric(compatible)
+    })()
 
-  // useEffect(() => {AsyncStorage.clear()})
+    supportedBiometric && handleBiometricAuth()
+  }, [])
 
   const handleBiometricAuth = async () => {
-
     LocalAuthentication.authenticateAsync({
       promptMessage: 'Login com Biometria',
       disableDeviceFallback: true,
@@ -52,27 +65,101 @@ export default function App() {
       )
     }
   }
+
+  const toggle = () => {
+    setIsDarkTheme(prevTheme => prevTheme = !prevTheme)
+    setNameIcon(prevIcon => prevIcon == 'sun-o' ? prevIcon = 'moon-o' : prevIcon = 'sun-o')
+  }
+  const [fontsLoaded] = useFonts({
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_700Bold,
+  })
+
+  if (!fontsLoaded) return null
+
   return (
     <>
       <SafeAreaView />
-      <StatusBar barStyle='default'/>
-      <NativeBaseProvider>
-        <ThemeProvider theme={dark}>
+      <StatusBar translucent backgroundColor={'transparent'} />
+      <NativeBaseProvider theme={themeNB}>
 
-          <RicoProvider>
-            <ItauVProvider>
-              <ItauMProvider>
+        <ThemeProvider theme={isDarkTheme ? dark : light}>
 
-                <GestureHandlerRootView style={{ flex: 1 }}>
-                  <Routes />
-                </GestureHandlerRootView>
+          {
+            authenticated ? (
+              <>
+                <TouchableOpacity style={styles.IconButton}
+                >
+                  <IconButton
+                    icon={<Icon as={FontAwesome} name={nameIcon} />}
+                    borderRadius="full" _icon={{
+                      color: "#fff",
+                      size: "lg"
+                    }}
+                    onPress={toggle}
+                  />
+                </TouchableOpacity>
 
-              </ItauMProvider>
-            </ItauVProvider>
-          </RicoProvider>
-          
+                <RicoProvider>
+                  <ItauVProvider>
+                    <ItauMProvider>
+
+                      <GestureHandlerRootView style={{ flex: 1 }}>
+                        <Routes />
+                      </GestureHandlerRootView>
+
+                    </ItauMProvider>
+                  </ItauVProvider>
+                </RicoProvider>
+              </>
+            ) : (
+              <Authenticate>
+                <TouchableHighlight
+                  style={[styles.login]}
+                  onPress={handleBiometricAuth}
+                >
+                  <>
+                    <Text style={styles.text}>entrar</Text>
+                    <Feather name="arrow-right" size={24} color="#fff" />
+                  </>
+                </TouchableHighlight>
+              </Authenticate>
+            )
+          }
         </ThemeProvider>
       </NativeBaseProvider>
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  IconButton: {
+    marginTop: 50,
+    position: 'absolute',
+    top: -20,
+    right: 10,
+    zIndex: 99,
+    padding: 10,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  text: {
+    color: '#fff',
+    fontSize: 16,
+    textTransform: 'capitalize',
+  },
+  
+  login: {
+    padding: 16,
+    paddingHorizontal: 20,
+    width: '90%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 30,
+    backgroundColor: '#F46818',
+  }
+})

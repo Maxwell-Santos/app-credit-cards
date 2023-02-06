@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Text, View } from "react-native";
 import { Card } from "../../../components/Card";
 import { Tag } from "../../../components/Tag";
@@ -12,8 +12,8 @@ export function ItauMastercard() {
   const {
     card,
     buys,
+    resultado
   }: CardProviderInterface = useContext(ItauMContext)
-
 
   return (
     <Styled.Container>
@@ -22,6 +22,7 @@ export function ItauMastercard() {
         validity={card.validity}
         limit={card.limit}
         available={card.available}
+        result={resultado}
       />
       <Styled.MonthsContainer>
 
@@ -29,7 +30,7 @@ export function ItauMastercard() {
           buys.map((month, index) => (
             <View key={index}>
 
-              <Styled.TitleMonth>{month.name}</Styled.TitleMonth>
+              <Styled.TitleMonth style={{fontFamily: 'Inter_400Regular'}}>{month.name}</Styled.TitleMonth>
 
               <Styled.Month>
                 {
@@ -40,7 +41,7 @@ export function ItauMastercard() {
                       price={buy.price}
                       date={buy.date}
                       quantityQuota={buy.quantityQuota}
-                      valueQuota={buy.valueQuota}
+                      priceQuota={buy.priceQuota}
                       description={buy.description || 'tem descrição não'}
                     />
                   ))

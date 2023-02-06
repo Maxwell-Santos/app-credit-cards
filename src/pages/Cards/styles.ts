@@ -6,7 +6,7 @@ export const Container = styled.ScrollView`
 `;
 
 export const Title = styled.Text`
-  color:  ${({theme}) => theme.COLOR.PRIMARY};
+  color: ${({theme}) => theme.COLOR.PRIMARY};
 `;
 
 export const MonthsContainer = styled.View`
@@ -20,8 +20,8 @@ export const Month = styled.View`
 export const TitleMonth = styled.Text`
   color: ${({theme}) => theme.COLOR.TITLE_MONTH};
   text-transform: capitalize;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
+  /* font-weight: 600; */
   margin: 30px 0px 16px 0px;
   margin-left: 10px;
 `;

@@ -1,16 +1,14 @@
 import styled from 'styled-components/native'
 
 export const Container = styled.View`
-  /* background-color: ${({ theme }) => theme.BACKGROUND.TAG}; */
-  border-radius: 10px;
-  padding: 16px;
-  /* margin: 8px 0px; */
+  border-radius: 4px;
+  padding: 12px;
 `;
 
 export const Title = styled.Text`
   color: ${({ theme }) => theme.COLOR.TEXT_TAG};
   font-size: 18px;
-  font-weight: 600;
+  /* font-weight: 600; */
 `;
 
 export const TagHeader = styled.View`
@@ -22,8 +20,8 @@ export const TagHeader = styled.View`
 
 export const BuyDescription = styled.Text`
   color: ${({ theme }) => theme.COLOR.TEXT_TAG_DESCRIPTION};
-  font-size: 16px;
-  margin: 8px 0px;
+  font-size: 14px;
+  margin-bottom: 8px;
 
 `;
 
@@ -35,14 +33,13 @@ export const Quotes = styled.Text`
 
 export const Date = styled.Text`
   color: ${({ theme }) => theme.COLOR.TEXT_TAG};
-  
 `;
 
 export const PriceContent = styled.View``;
 
 export const Price = styled.Text`
   color: ${({ theme }) => theme.COLOR.TEXT_TAG};
-  font-size: 20px;
+  font-size: 16px;
 `;
 
 export const TagFooter = styled.View`

@@ -1,6 +1,6 @@
 import {BuyProps} from "./BuyInterface"
 import CardContext from "./CardContext";
-import months from "../utils/monthVisa";
+import months from "../utils/monthsVisa";
 
 export default interface CardProviderInterface {
   buys: typeof months;
@@ -11,4 +11,5 @@ export default interface CardProviderInterface {
   
   SetLocalValue: (data) => void;
   GetLocalValue: () => void;
+  resultado: 0;
 }

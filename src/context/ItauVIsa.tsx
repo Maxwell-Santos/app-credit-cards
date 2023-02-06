@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { monthsUpdate } from "../utils/checkMonth";
-import monthVisa from "../utils/monthVisa";
+import monthsVisa from "../utils/monthsVisa";
 
 export const ItauVContext = createContext<any>({})
 
@@ -14,7 +14,8 @@ export function ItauVProvider({ children }) {
     validity: '26/10',
   })
 
-  const [buys, setBuys] = useState([])
+  const [buys, setBuys] = useState(monthsVisa)
+  const [resultado, setResultados] = useState(0)
 
   /**
  * IMPORTANTE PARA O FUNCIONAMENTO DO CÓDIGO 
@@ -29,7 +30,7 @@ export function ItauVProvider({ children }) {
   const AddNewBuy = (data) => {
     // setBuys(prev => [...prev, data])
 
-    setBuys(monthsUpdate(data, monthVisa))
+    setBuys(monthsUpdate(data, monthsVisa))
     SetLocalValue(buys)
   }
 
@@ -66,6 +67,16 @@ export function ItauVProvider({ children }) {
     setCard(card => card.available = newAvailable)
   }
 
+  
+  let a = []
+  useMemo(() => {
+    buys.map(item => {
+      item.quotes.map(item => a.push(item.priceQuota))
+      let b = a.reduce((prev, curr) => prev + curr, 0)
+      setResultados(b)
+    })
+  },[buys])
+
   return (
     <ItauVContext.Provider value={{
       buys,
@@ -75,6 +86,7 @@ export function ItauVProvider({ children }) {
 
       SetLocalValue,
       GetLocalValue,
+      resultado
     }}>
 
       {children}
