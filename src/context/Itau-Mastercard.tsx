@@ -8,8 +8,8 @@ export const ItauMContext = createContext<any>({})
 export function ItauMProvider({ children }) {
   const [card, setCard] = useState({
     title: 'Itaú Mastercard',
-    limit: 2000.00, //limite total
-    available: 2000.00, //limite disponível
+    limit: 550.00, //limite total
+    available: 550.00, //limite disponível
     validity: '26/10',
   })
 
@@ -60,11 +60,6 @@ export function ItauMProvider({ children }) {
       console.error(err)
     }
   }
-
-  const UpdateAvailableCard = (newAvailable) => {
-    setCard(card => card.available = newAvailable)
-  }
-
   let a = []
   useMemo(() => {
     buys.map(item => {
@@ -79,7 +74,6 @@ export function ItauMProvider({ children }) {
       buys,
       AddNewBuy,
       card,
-      UpdateAvailableCard,
 
       SetLocalValue,
       GetLocalValue,

@@ -11,7 +11,7 @@ export function RicoProvider({ children }) {
     title: 'Rico',
     limit: 2000.00, //limite total
     available: 2000.00, //limite disponível
-    validity: '26/10',
+    validity: '01/28',
   })
 
   const [buys, setBuys] = useState(monthsRico)
@@ -63,10 +63,6 @@ export function RicoProvider({ children }) {
       console.error(err)
     }
   }
-
-  const UpdateAvailableCard = (newAvailable) => {
-    setCard(card => card.available = newAvailable)
-  }
   
   let a = []
   useMemo(() => {
@@ -82,8 +78,7 @@ export function RicoProvider({ children }) {
       buys,
       AddNewBuy,
       card,
-      UpdateAvailableCard,
-
+      
       SetLocalValue,
       GetLocalValue,
       resultado

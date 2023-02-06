@@ -1,25 +1,22 @@
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import { Feather } from '@expo/vector-icons';
-import { useTheme } from "styled-components";
-import { useContext } from "react";
-import { Authentication } from "../../context/AuthenticateProvider";
-import AuthenticationInterface from "../../interface/AuthenticationInterface";
+import { StyleSheet, Text, View } from "react-native";
 
-interface AuthenticateProps {
-  func: () => Promise<void>
-}
-export function Authenticate({children}) {
-  const theme = useTheme()
+export function Authenticate({ children }) {
   return (
-   <View style={[styles.container, {backgroundColor: '#1f1f1f'}]}>
-    <Text style={styles.title}>Entre com sua digital</Text>
+    <View style={[styles.container, { backgroundColor: '#1f1f1f' }]}>
+      <View>
+        <Text style={styles.title}>Bem vindo ao seu app de gerenciamento de compras</Text>
+        <Text style={styles.description}>O propósito do app é gerenciar seus gastos com cartões de crédito, com base em dados cedidos por você mesmo.</Text>
+
+        <Text style={styles.description}>Aqui não tratamos de assuntos sensíveis relacionados ao seu cartão, como número do cartão, cvv, nome do titular etc.</Text>
+      </View>
       {children}
-   </View>
- )
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
+    padding: 20,
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -27,7 +24,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontSize: 20,
-    
+    fontSize: 28,
+    fontFamily: 'Inter_700Bold'
+  },
+  description: {
+    color: '#fff',
+    fontSize: 16,
+    marginTop: 20,
   }
 })

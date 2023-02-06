@@ -7,7 +7,6 @@ export default interface CardProviderInterface {
   AddNewBuy: (data: BuyProps) => void;
 
   card: CardContext;
-  UpdateAvailableCard: (newAvailable) => void;
   
   SetLocalValue: (data) => void;
   GetLocalValue: () => void;

@@ -9,9 +9,9 @@ export function ItauVProvider({ children }) {
 
   const [card, setCard] = useState({
     title: 'Itaú Visa',
-    limit: 2000.00, //limite total
-    available: 2000.00, //limite disponível
-    validity: '26/10',
+    limit: 2390.00, //limite total
+    available: 2390.00, //limite disponível
+    validity: '01/30',
   })
 
   const [buys, setBuys] = useState(monthsVisa)
@@ -62,11 +62,6 @@ export function ItauVProvider({ children }) {
       console.error(err)
     }
   }
-
-  const UpdateAvailableCard = (newAvailable) => {
-    setCard(card => card.available = newAvailable)
-  }
-
   
   let a = []
   useMemo(() => {
@@ -82,7 +77,6 @@ export function ItauVProvider({ children }) {
       buys,
       AddNewBuy,
       card,
-      UpdateAvailableCard,
 
       SetLocalValue,
       GetLocalValue,

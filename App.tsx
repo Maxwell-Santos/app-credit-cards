@@ -94,7 +94,7 @@ export default function App() {
                   <IconButton
                     icon={<Icon as={FontAwesome} name={nameIcon} />}
                     borderRadius="full" _icon={{
-                      color: "#fff",
+                      color: "#c0c0c0",
                       size: "lg"
                     }}
                     onPress={toggle}
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     top: -20,
     right: 10,
     zIndex: 99,
-    padding: 10,
+    padding: 5,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   login: {
     padding: 16,
     paddingHorizontal: 20,
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
