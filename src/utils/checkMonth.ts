@@ -5,26 +5,27 @@ import monthVisa from './monthsVisa';
   * A comparação foi feita por meio de index, no qual cada objeto 'month', tem um index, sendo o index 0(janeiro), e assim por diante.
   */
 
- function juntarArrays(mesesDeCompra, mesesNoTotal) {
+ function joinArrays(monthsOfBuy, totalMonths) {
 
-  const finalmente = mesesNoTotal.map(mesPrincipal => {
-    mesesDeCompra.forEach(mesDeCompra => {
-      if(mesPrincipal.name == mesDeCompra.name){
-        mesPrincipal.quotes.concat(mesDeCompra.quotes)
+  const finallyLoop = totalMonths.map(mainMonth => {
+    monthsOfBuy.forEach(singularMonthOfBuy => {
+      
+      if(mainMonth.name == singularMonthOfBuy.name){
+        mainMonth.quotes.concat(singularMonthOfBuy.quotes)
       }
-    });
+    })
 
-    return mesPrincipal
+    return mainMonth
   })
 
-  return finalmente
+  return finallyLoop
 }
 
 export function monthsUpdate(buy: BuyProps, months: typeof monthVisa) {
-  const buyDate = new Date(buy.date)
+  const buyDate = new Date(buy.date)  
   const buyMonth = buyDate.getMonth()
   let monthsContainInstallments = [] //meses que contém as parcelas
-  
+
   months.map((month, indexMonth) => {
     
     if (buyMonth == indexMonth) {
@@ -33,11 +34,11 @@ export function monthsUpdate(buy: BuyProps, months: typeof monthVisa) {
 
       while (quantityQuotes > 0) {
 
-        months.forEach((mes, index) => {
+        months.forEach((month, index) => {
           if(index == monthBuy) {
-            mes.quotes.push(buy)
+            month.quotes.push(buy)
 
-            monthsContainInstallments.push(mes)
+            monthsContainInstallments.push(month)
           }
         })
         monthBuy++
@@ -47,6 +48,6 @@ export function monthsUpdate(buy: BuyProps, months: typeof monthVisa) {
     }
   })
 
-  const retorno = juntarArrays(monthsContainInstallments, months)
+  const retorno = joinArrays(monthsContainInstallments, months)
   return retorno
 }

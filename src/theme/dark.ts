@@ -5,11 +5,12 @@ export default {
     BUTTON: '#F46818',
     CARD: '#F46818',
     INPUT: '#000',
-
+    
     TAG: '#36363686',
   },
   
   COLOR: {
+    TITLE: '#F46818',
     PRIMARY: '#c0c0c0',
     BUTTON: '#FFF',
     BUTTON_RESET:'#FFF',

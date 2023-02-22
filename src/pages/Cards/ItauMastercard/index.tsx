@@ -37,6 +37,7 @@ export function ItauMastercard() {
                   month.quotes.map((buy, index) => (
                     <Tag
                       key={index}
+                      bankName={'itau-mastercard'}
                       title={buy.title}
                       price={buy.price}
                       date={buy.date}

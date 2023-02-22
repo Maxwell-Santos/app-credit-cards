@@ -11,7 +11,8 @@ export function RicoProvider({ children }) {
     title: 'Rico',
     limit: 2000.00, //limite total
     available: 2000.00, //limite disponível
-    validity: '01/28',
+    validity: '25',
+    id: 3
   })
 
   const [buys, setBuys] = useState(monthsRico)

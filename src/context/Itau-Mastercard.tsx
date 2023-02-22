@@ -10,7 +10,8 @@ export function ItauMProvider({ children }) {
     title: 'Itaú Mastercard',
     limit: 550.00, //limite total
     available: 550.00, //limite disponível
-    validity: '26/10',
+    validity: '26',
+    id: 2
   })
 
   const [buys, setBuys] = useState(monthsMastercard)
@@ -30,6 +31,7 @@ export function ItauMProvider({ children }) {
   const AddNewBuy = (data) => {
     // setBuys(prev => [...prev, data])
 
+    //passando os dados preenchidos no form e os meses do itau mastercard
     setBuys(monthsUpdate(data, monthsMastercard))
     SetLocalValue(buys)
   }

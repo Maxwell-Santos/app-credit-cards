@@ -1,50 +1,63 @@
+import { BuyProps } from './../interface/BuyInterface';
 export default [
   {
     name:'janeiro',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'fevereiro',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'março',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'abril',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'maio',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'junho',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'julho',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'agosto',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'setembro',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'outubro',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'novembro',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
   {
     name:'dezembro',
-    quotes: [],
+    quotes: <BuyProps[]>[],
+    quotesPayed: <string[]>[]
   },
 ]

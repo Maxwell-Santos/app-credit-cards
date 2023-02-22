@@ -28,7 +28,6 @@ export const BuyDescription = styled.Text`
 export const Quotes = styled.Text`
   color: ${({ theme }) => theme.COLOR.TEXT_TAG};
   font-size: 16px;
-
 `;
 
 export const Date = styled.Text`

@@ -36,6 +36,7 @@ export function Rico() {
                   month.quotes.map((buy, index) => (
                     <Tag
                       key={index}
+                      bankName={'rico'}
                       title={buy.title}
                       price={buy.price}
                       date={buy.date}

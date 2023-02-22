@@ -11,7 +11,8 @@ export function ItauVProvider({ children }) {
     title: 'Itaú Visa',
     limit: 2390.00, //limite total
     available: 2390.00, //limite disponível
-    validity: '01/30',
+    validity: '26',
+    id: 1
   })
 
   const [buys, setBuys] = useState(monthsVisa)
@@ -27,13 +28,39 @@ export function ItauVProvider({ children }) {
    * IMPORTANTE PARA O FUNCIONAMENTO DO CÓDIGO 
   */
 
+  type seila = {
+    priceQuota: number,
+    id: string,
+    quantityQuota: number,
+    monthQuota: number,
+    tagState: number,
+  }
+
+  const SetPaymentQuote = ({ id, priceQuota, quantityQuota, monthQuota, tagState }: seila) => {
+
+    buys.map((month, indexMonth) => {
+
+      if (monthQuota == indexMonth) { //encontrei o mês da compra
+        month.quotes.map(parcela => {
+          if (parcela.id == id) { //encontrei a parcela e o mês da compra
+            
+            setResultados(prev => prev - priceQuota)
+            console.log(resultado)
+            console.log(month)
+            
+            // console.log(parcelasPagas)
+          }
+        })
+        console.log('essa compra foi feita no mês de:', month.name)
+      }
+    })
+  }
+
   const AddNewBuy = (data) => {
     // setBuys(prev => [...prev, data])
-
     setBuys(monthsUpdate(data, monthsVisa))
     SetLocalValue(buys)
   }
-
 
   //data = array de objetos das compras que eu fiz
   const SetLocalValue = async (data) => {
@@ -62,20 +89,22 @@ export function ItauVProvider({ children }) {
       console.error(err)
     }
   }
-  
+
   let a = []
+
   useMemo(() => {
     buys.map(item => {
       item.quotes.map(item => a.push(item.priceQuota))
       let b = a.reduce((prev, curr) => prev + curr, 0)
       setResultados(b)
     })
-  },[buys])
+  }, [buys])
 
   return (
     <ItauVContext.Provider value={{
       buys,
       AddNewBuy,
+      SetPaymentQuote,
       card,
 
       SetLocalValue,

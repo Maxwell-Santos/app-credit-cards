@@ -9,15 +9,15 @@ export function AuthenticateProvider({children}){
   const [supportedBiometric, setSupportedBiometric] = useState(false)
   const [authenticated, setAuthenticated] = useState(false)
 
-  useEffect(() => {
-    (async () => {
-      const compatible = await LocalAuthentication.hasHardwareAsync()
-      setSupportedBiometric(compatible)
-    })()
+  // useEffect(() => {
+  //   (async () => {
+  //     const compatible = await LocalAuthentication.hasHardwareAsync()
+  //     setSupportedBiometric(compatible)
+  //   })()
 
-    supportedBiometric && handleBiometricAuth()
+  //   supportedBiometric && handleBiometricAuth()
 
-  }, [])
+  // }, [])
 
   const handleBiometricAuth = async () => {
     LocalAuthentication.authenticateAsync({

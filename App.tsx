@@ -23,16 +23,14 @@ import { themeNB } from './src/theme/NativeBase';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { Authenticate } from './src/components/Authenticate';
 import * as LocalAuthentication from 'expo-local-authentication';
-import { useTheme } from "styled-components";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
-  const theme = useTheme()
-
   const [supportedBiometric, setSupportedBiometric] = useState(false)
   const [authenticated, setAuthenticated] = useState(false)
 
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
-  const [nameIcon, setNameIcon] = useState('sun-o')
+  const [isDarkTheme, setIsDarkTheme] = useState(true)
+  const [nameIcon, setNameIcon] = useState('moon-o')
 
   useEffect(() => {
     (async () => {
@@ -43,9 +41,10 @@ export default function App() {
     supportedBiometric && handleBiometricAuth()
   }, [])
 
+
   const handleBiometricAuth = async () => {
     LocalAuthentication.authenticateAsync({
-      promptMessage: 'Login com Biometria',
+      promptMessage: 'Login no Between Credits',
       disableDeviceFallback: true,
       cancelLabel: 'Cancelar',
 
@@ -60,8 +59,7 @@ export default function App() {
 
     if (!savedBiometrics) {
       return Alert.alert(
-        'Biometric record not found',
-        'Please verify your identity with your password',
+        'Biometria não encontrada',
       )
     }
   }

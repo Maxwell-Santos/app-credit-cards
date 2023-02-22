@@ -8,6 +8,8 @@ import {
 } from '@expo-google-fonts/inter';
 import { useFonts } from 'expo-font';
 import { Progress } from 'native-base'
+import { useSharedValue, withTiming } from 'react-native-reanimated';
+import { useMemo } from 'react';
 
 interface CardProps {
   title: string;
@@ -34,7 +36,13 @@ export function Card({
   let regra3 = (100 * result) / limit
   let av = available - result
 
-  console.log("resultado no card", result && result.toFixed(2))
+
+  const total = useSharedValue(limit.toFixed(2))
+
+  useMemo(() => {
+    total.value =  withTiming(limit.toFixed(2), {duration: 500})
+  }, [total.value])
+  // console.log("resultado no card", result && result.toFixed(2))
 
   return (
     <Styled.Card>
@@ -43,12 +51,12 @@ export function Card({
       <Styled.CashContainer>
         <View>
           <Styled.Description style={{fontFamily: 'Inter_400Regular'}}>total</Styled.Description>
-          <Styled.Cash>{limit}</Styled.Cash>
+          <Styled.Cash>{total.value}</Styled.Cash>
         </View>
 
         <View>
           <Styled.Description style={{fontFamily: 'Inter_400Regular'}}>disponível</Styled.Description>
-          <Styled.Cash style={{fontFamily: 'Inter_400Regular'}}>{av}</Styled.Cash>
+          <Styled.Cash style={{fontFamily: 'Inter_400Regular'}}>{av.toFixed(2)}</Styled.Cash>
         </View>
       </Styled.CashContainer>
 
@@ -56,13 +64,16 @@ export function Card({
         <Progress 
           value={result ? regra3 : 0} 
           size="xs" _filledTrack={{
-            bg: "#dd5100"
+            bg: "#ffa135",
+          }}
+          _light={{
+            bg: '#fff'
           }}
           />
         </View>
 
       <Styled.ContentValidity>
-        <Styled.Validity style={{fontFamily: 'Inter_400Regular'}}>{validity}</Styled.Validity>
+        <Styled.Validity style={{fontFamily: 'Inter_400Regular'}}>vencimento: {validity}</Styled.Validity>
       </Styled.ContentValidity>
     </Styled.Card>
   )

@@ -11,7 +11,7 @@ export const Title = styled.Text`
 `;
 
 export const ContentValidity = styled.View`
-
+  align-items: flex-end;
 `;
 
 export const Validity = styled.Text`

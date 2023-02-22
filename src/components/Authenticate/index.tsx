@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
+import { useTheme } from "styled-components";
 
 export function Authenticate({ children }) {
   return (
@@ -24,8 +25,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontSize: 28,
-    fontFamily: 'Inter_700Bold'
+    fontSize: 30,
+    fontFamily: 'Inter_700Bold',
+    marginBottom: 14
   },
   description: {
     color: '#fff',

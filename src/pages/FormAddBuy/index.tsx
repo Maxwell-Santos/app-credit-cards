@@ -7,17 +7,19 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 
 import * as Styled from './styles'
 import { useTheme } from "styled-components";
-import { Select, theme } from "native-base";
+import { Select } from "native-base";
 
 import { Alert } from "../../components/Alert";
 import { useForm } from "react-hook-form";
 import { CheckBank } from "../../utils/checkBank";
 import { RicoContext } from "../../context/Rico";
+
 import CardProviderInterface from "../../interface/CardProviderInterface";
 import { ItauMContext } from "../../context/Itau-Mastercard";
 import { ItauVContext } from "../../context/ItauVIsa";
-import { Link } from "@react-navigation/native";
 import { ModalReset } from "../../components/ModalReset";
+
+import uuid from "react-uuid";
 
 export function FormAddBuy({ navigation }) {
 
@@ -52,13 +54,14 @@ export function FormAddBuy({ navigation }) {
       negativeButtonLabel: 'fechar',
     })
   }
-
   const showDatepicker = () => {
     showMode('date');
   }
 
+
   const [priceQuota, setPriceQuota] = useState(0)
 
+  //setar o valor de cada parcela
   const handleQuota = (quantityQuota: number) => {
     let quotaFounded = price / quantityQuota
 
@@ -70,6 +73,7 @@ export function FormAddBuy({ navigation }) {
   const handleCard = (cardName: string) => {
     setCard(cardName)
     setValue('cardTitle', cardName) //setando valor com react-hook-form
+    setValue('id', uuid())  //setando o id da compra
   }
 
   const [haveQuotes, setHaveQuotes] = useState(false)
@@ -87,7 +91,6 @@ export function FormAddBuy({ navigation }) {
       console.log(getValues())
     }
     else {
-
       if (bankName == 'itau-mastercard') ITAU_M.AddNewBuy(data)
       if (bankName == 'itau-visa') ITAU_V.AddNewBuy(data)
       if (bankName == 'rico') RICO.AddNewBuy(data)
@@ -108,6 +111,7 @@ export function FormAddBuy({ navigation }) {
 
     register('cardTitle')
     register('date')
+    register('id')
 
   }, [register])
 
@@ -242,7 +246,7 @@ export function FormAddBuy({ navigation }) {
                     backgroundColor: theme.BACKGROUND.INPUT,
                   }
                   ]}
-                  placeholder="Escolha um Cartão de crédito"
+                  placeholder="Escolha o cartão"
                   accessibilityLabel="Escolha um Cartão de crédito"
                   borderWidth={0}
                   borderRadius={10}
@@ -250,9 +254,9 @@ export function FormAddBuy({ navigation }) {
                   selectedValue={card}
                   onValueChange={(card) => handleCard(card)}
                 >
+                  <Select.Item label="Itaú Visa" value="itau-visa" />
                   <Select.Item label="Rico" value="rico" />
                   <Select.Item label="Itaú Mastercard" value="itau-mastercard" />
-                  <Select.Item label="Itaú Visa" value="itau-visa" />
                 </Select>
               </Styled.Selection>
             </View>
