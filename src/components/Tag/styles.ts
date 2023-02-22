@@ -1,14 +1,14 @@
 import styled from 'styled-components/native'
 
 export const Container = styled.View`
-  border-radius: 4px;
+  /* border-radius: 8px; */
   padding: 12px;
+  margin-top: 10px;
 `;
 
 export const Title = styled.Text`
-  color: ${({ theme }) => theme.COLOR.TEXT_TAG};
+color: ${({ theme }) => theme.COLOR.TEXT_TAG};
   font-size: 18px;
-  /* font-weight: 600; */
 `;
 
 export const TagHeader = styled.View`

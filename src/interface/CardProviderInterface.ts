@@ -5,7 +5,7 @@ import months from "../utils/monthsVisa";
 export default interface CardProviderInterface {
   buys: typeof months;
   AddNewBuy: (data: BuyProps) => void;
-  SetPaymentQuote: ({priceQuota, id, quantityQuota, monthQuota}) => void;
+  SetPaymentQuote: (indexMonth: number, state: boolean) => void;
 
   card: CardContext;
   

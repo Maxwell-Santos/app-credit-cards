@@ -1,4 +1,4 @@
-import { Icon, IconButton, NativeBaseProvider } from 'native-base';
+import { Icon, IconButton, NativeBaseProvider, View } from 'native-base';
 import { useEffect, useState } from 'react';
 import { Alert, StatusBar, StyleSheet, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -74,6 +74,7 @@ export default function App() {
     Inter_700Bold,
   })
 
+  // AsyncStorage.clear()
   if (!fontsLoaded) return null
 
   return (
@@ -81,21 +82,19 @@ export default function App() {
       <SafeAreaView />
       <StatusBar translucent backgroundColor={'transparent'} />
       <NativeBaseProvider theme={themeNB}>
-
         <ThemeProvider theme={isDarkTheme ? dark : light}>
 
           {
             authenticated ? (
               <>
-                <TouchableOpacity style={styles.IconButton}
-                >
+                <TouchableOpacity style={styles.IconButton}>
                   <IconButton
                     icon={<Icon as={FontAwesome} name={nameIcon} />}
+                    onPress={toggle}
                     borderRadius="full" _icon={{
                       color: "#c0c0c0",
                       size: "lg"
                     }}
-                    onPress={toggle}
                   />
                 </TouchableOpacity>
 
@@ -113,10 +112,7 @@ export default function App() {
               </>
             ) : (
               <Authenticate>
-                <TouchableHighlight
-                  style={[styles.login]}
-                  onPress={handleBiometricAuth}
-                >
+                <TouchableHighlight style={[styles.login]} onPress={handleBiometricAuth}>
                   <>
                     <Text style={styles.text}>entrar</Text>
                     <Feather name="arrow-right" size={24} color="#fff" />
@@ -149,7 +145,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textTransform: 'capitalize',
   },
-  
+
   login: {
     padding: 16,
     paddingHorizontal: 20,

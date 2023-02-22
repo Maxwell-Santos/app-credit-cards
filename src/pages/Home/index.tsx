@@ -10,7 +10,6 @@ import {
 import { View } from "native-base";
 
 export function Index() {
-  const theme = useTheme()
 
   const [] = useFonts({
     Inter_300Light,

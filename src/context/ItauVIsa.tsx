@@ -28,36 +28,46 @@ export function ItauVProvider({ children }) {
    * IMPORTANTE PARA O FUNCIONAMENTO DO CÓDIGO 
   */
 
-  type seila = {
-    priceQuota: number,
-    id: string,
-    quantityQuota: number,
-    monthQuota: number,
-    tagState: number,
-  }
+  //desconta o valor do mês, quando foi pago, para liberar o limite do cartão
+  const SetPaymentQuote = (indexMonthQuota: number, state?: boolean) => {
+    const priceQuotes = []
 
-  const SetPaymentQuote = ({ id, priceQuota, quantityQuota, monthQuota, tagState }: seila) => {
+    if (state == true) {
 
-    buys.map((month, indexMonth) => {
+      buys.map((month, indexMonth) => {
+  
+        if (indexMonthQuota == indexMonth) { //encontrei o mês da compra
+  
+          month.quotes.forEach(parcela => priceQuotes.push(parcela.priceQuota))
+          //somando o valor total das parcelas desse mês
+          const sumQuota = priceQuotes.reduce((prev,curr) => prev + curr, 0)
+  
+          console.log(sumQuota)
+          
+          setResultados(prev => prev - sumQuota)
+  
+          console.log('essa compra foi feita no mês de:', month.name)
+        }
+      })
+    } else { //executa a mesma coisa, porém somando os valores, devolvendo o limite disponível para o cartão
+      
+      buys.map((month, indexMonth) => {
+        if (indexMonthQuota == indexMonth) { //encontrei o mês da compra
 
-      if (monthQuota == indexMonth) { //encontrei o mês da compra
-        month.quotes.map(parcela => {
-          if (parcela.id == id) { //encontrei a parcela e o mês da compra
-            
-            setResultados(prev => prev - priceQuota)
-            console.log(resultado)
-            console.log(month)
-            
-            // console.log(parcelasPagas)
-          }
-        })
-        console.log('essa compra foi feita no mês de:', month.name)
-      }
-    })
+          month.quotes.forEach(parcela => priceQuotes.push(parcela.priceQuota))
+          //somando o valor total das parcelas desse mês
+          const sumQuota = priceQuotes.reduce((prev,curr) => prev + curr, 0)
+  
+          setResultados(prev => prev + sumQuota)
+  
+          console.log('essa compra foi feita no mês de:', month.name)
+        }
+      })
+    }
   }
 
   const AddNewBuy = (data) => {
-    // setBuys(prev => [...prev, data])
+
     setBuys(monthsUpdate(data, monthsVisa))
     SetLocalValue(buys)
   }
@@ -92,6 +102,7 @@ export function ItauVProvider({ children }) {
 
   let a = []
 
+  //desconta o valor da compra no total do limite do cartão
   useMemo(() => {
     buys.map(item => {
       item.quotes.map(item => a.push(item.priceQuota))

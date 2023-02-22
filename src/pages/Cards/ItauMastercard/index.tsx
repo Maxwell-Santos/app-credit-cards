@@ -12,8 +12,19 @@ export function ItauMastercard() {
   const {
     card,
     buys,
-    resultado
+    resultado,
+    SetPaymentQuote
   }: CardProviderInterface = useContext(ItauMContext)
+
+  const setQuotesPayed = (indexMonth: number) => {
+    buys.forEach((month, index) => {
+      if (indexMonth == index) {
+        month.quotesPayed = month.quotesPayed == false ? true : false
+
+        month.quotesPayed ? SetPaymentQuote(indexMonth, true) : SetPaymentQuote(indexMonth, false)
+      }
+    })
+  }
 
   return (
     <Styled.Container>
@@ -26,17 +37,28 @@ export function ItauMastercard() {
       />
       <Styled.MonthsContainer>
 
-        { buys ?
-          buys.map((month, index) => (
-            <View key={index}>
+      {buys ?
+          buys.map((month, indexMonth) => (
+            <View key={indexMonth}>
 
-              <Styled.TitleMonth style={{fontFamily: 'Inter_400Regular'}}>{month.name}</Styled.TitleMonth>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Styled.TitleMonth>{month.name}</Styled.TitleMonth>
+                {
+                  month.quotes.length > 0 && (
+                    <Styled.Pay onPress={() => setQuotesPayed(indexMonth)}>
+                      <Text style={{ color: '#fff' }}>pago</Text>
+                    </Styled.Pay>
+                  )
+                }
+              </View>
 
               <Styled.Month>
                 {
                   month.quotes.map((buy, index) => (
                     <Tag
                       key={index}
+                      month={indexMonth}
+                      id={buy.id}
                       bankName={'itau-mastercard'}
                       title={buy.title}
                       price={buy.price}
@@ -44,6 +66,7 @@ export function ItauMastercard() {
                       quantityQuota={buy.quantityQuota}
                       priceQuota={buy.priceQuota}
                       description={buy.description || 'tem descrição não'}
+                      state={month.quotesPayed}
                     />
                   ))
                 }
@@ -53,7 +76,6 @@ export function ItauMastercard() {
           )) : <Text style={{color: '#fff'}}>Até o memento, sem compras</Text>
         }
       </Styled.MonthsContainer>
-
     </Styled.Container>
   )
 }

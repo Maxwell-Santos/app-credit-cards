@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "styled-components";
 
 export function Authenticate({ children }) {
+  //children é botão de entrar
   return (
     <View style={[styles.container, { backgroundColor: '#1f1f1f' }]}>
       <View>
@@ -19,9 +20,10 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 100
+    paddingTop: 150,
+    paddingBottom: 50,
   },
   title: {
     color: '#fff',

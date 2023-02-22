@@ -24,14 +24,49 @@ export function RicoProvider({ children }) {
   useEffect(() => {
     GetLocalValue()
   }, [])
-
   /**
    * IMPORTANTE PARA O FUNCIONAMENTO DO CÓDIGO 
   */
 
+  //desconta o valor do mês, quando foi pago, para liberar o limite do cartão
+  const SetPaymentQuote = (indexMonthQuota: number, state?: boolean) => {
+    const priceQuotes = []
+
+    if (state == true) {
+
+      buys.map((month, indexMonth) => {
+  
+        if (indexMonthQuota == indexMonth) { //encontrei o mês da compra
+  
+          month.quotes.forEach(parcela => priceQuotes.push(parcela.priceQuota))
+          //somando o valor total das parcelas desse mês
+          const sumQuota = priceQuotes.reduce((prev,curr) => prev + curr, 0)
+  
+          console.log(sumQuota)
+          
+          setResultados(prev => prev - sumQuota)
+  
+          console.log('essa compra foi feita no mês de:', month.name)
+        }
+      })
+    } else { //executa a mesma coisa, porém somando os valores, devolvendo o limite disponível para o cartão
+      
+      buys.map((month, indexMonth) => {
+        if (indexMonthQuota == indexMonth) { //encontrei o mês da compra
+
+          month.quotes.forEach(parcela => priceQuotes.push(parcela.priceQuota))
+          //somando o valor total das parcelas desse mês
+          const sumQuota = priceQuotes.reduce((prev,curr) => prev + curr, 0)
+  
+          setResultados(prev => prev + sumQuota)
+  
+          console.log('essa compra foi feita no mês de:', month.name)
+        }
+      })
+    }
+  }
 
   const AddNewBuy = (data) => {
-    // setBuys(prev => [...prev, data])
 
     setBuys(monthsUpdate(data, monthsRico))
     SetLocalValue(buys)
@@ -44,7 +79,7 @@ export function RicoProvider({ children }) {
 
     try {
       const JSONData = JSON.stringify(buys)
-      await AsyncStorage.setItem('RICO', JSONData)
+      await AsyncStorage.setItem('BUYS_RICO', JSONData)
 
     } catch (err) {
       console.error(err)
@@ -53,7 +88,7 @@ export function RicoProvider({ children }) {
 
   const GetLocalValue = async () => {
     try {
-      const value = await AsyncStorage.getItem('RICO')
+      const value = await AsyncStorage.getItem('BUYS_RICO')
 
       if (value != null) {
         setBuys(JSON.parse(value))
@@ -64,21 +99,24 @@ export function RicoProvider({ children }) {
       console.error(err)
     }
   }
-  
+
   let a = []
+
+  //desconta o valor da compra no total do limite do cartão
   useMemo(() => {
     buys.map(item => {
       item.quotes.map(item => a.push(item.priceQuota))
       let b = a.reduce((prev, curr) => prev + curr, 0)
       setResultados(b)
     })
-  },[buys])
+  }, [buys])
 
   return (
     <RicoContext.Provider value={{
       buys,
       AddNewBuy,
       card,
+      SetPaymentQuote,
       
       SetLocalValue,
       GetLocalValue,

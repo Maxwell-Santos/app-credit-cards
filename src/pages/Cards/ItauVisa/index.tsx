@@ -12,13 +12,21 @@ export function ItauVisa() {
   const {
     card,
     buys,
-    resultado
+    resultado,
+    SetPaymentQuote
   }: CardProviderInterface = useContext(ItauVContext)
 
-  const [payed, setPayed] = useState(false)
 
-  console.log(payed)
-  
+  const setQuotesPayed = (indexMonth: number) => {
+    buys.forEach((month, index) => {
+      if (indexMonth == index) {
+        month.quotesPayed = month.quotesPayed == false ? true : false
+
+        month.quotesPayed ? SetPaymentQuote(indexMonth, true) : SetPaymentQuote(indexMonth, false)
+      }
+    })
+  }
+
   return (
     <Styled.Container>
       <Card
@@ -38,12 +46,7 @@ export function ItauVisa() {
                 <Styled.TitleMonth>{month.name}</Styled.TitleMonth>
                 {
                   month.quotes.length > 0 && (
-                    <Styled.Pay 
-                      onPress={() => {
-                        setPayed(prev => prev = !prev)
-                        console.log(indexMonth)
-                      }}
-                    >
+                    <Styled.Pay onPress={() => setQuotesPayed(indexMonth)}>
                       <Text style={{ color: '#fff' }}>pago</Text>
                     </Styled.Pay>
                   )
@@ -64,7 +67,7 @@ export function ItauVisa() {
                       quantityQuota={buy.quantityQuota}
                       priceQuota={buy.priceQuota}
                       description={buy.description || 'tem descrição não'}
-                      state={payed}
+                      state={month.quotesPayed}
                     />
                   ))
                 }
