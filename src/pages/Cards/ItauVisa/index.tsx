@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Text, View } from "react-native";
 import { Card } from "../../../components/Card";
 import { Tag } from "../../../components/Tag";
@@ -16,8 +16,8 @@ export function ItauVisa() {
     SetPaymentQuote
   }: CardProviderInterface = useContext(ItauVContext)
 
-
   const setQuotesPayed = (indexMonth: number) => {
+
     buys.forEach((month, index) => {
       if (indexMonth == index) {
         month.quotesPayed = month.quotesPayed == false ? true : false

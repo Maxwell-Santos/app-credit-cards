@@ -39,11 +39,9 @@ export function ItauVProvider({ children }) {
         if (indexMonthQuota == indexMonth) { //encontrei o mês da compra
   
           month.quotes.forEach(parcela => priceQuotes.push(parcela.priceQuota))
+          
           //somando o valor total das parcelas desse mês
           const sumQuota = priceQuotes.reduce((prev,curr) => prev + curr, 0)
-  
-          console.log(sumQuota)
-          
           setResultados(prev => prev - sumQuota)
   
           console.log('essa compra foi feita no mês de:', month.name)
@@ -110,6 +108,7 @@ export function ItauVProvider({ children }) {
       setResultados(b)
     })
   }, [buys])
+
 
   return (
     <ItauVContext.Provider value={{
