@@ -1,16 +1,16 @@
 {
   "build": {
-    "preview": {
+    "Cards Manager": {
       "android": {
         "buildType": "apk"
       }
     },
-    "preview2": {
+    "Cards Manager2": {
       "android": {
         "gradleCommand": ":app:assembleRelease"
       }
     },
-    "preview3": {
+    "Cards Manager3": {
       "developmentClient": true
     },
     "production": {}
