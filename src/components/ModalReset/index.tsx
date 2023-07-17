@@ -24,12 +24,12 @@ export function ModalReset({open = false}) {
             <Button variant="ghost" colorScheme="blueGray" onPress={() => {
               setShowModal(false);
             }}>
-              Cancel
+              Cancelar
             </Button>
             <Button onPress={() => {
               setShowModal(false);
             }}>
-              Save
+              Resetar os dados
             </Button>
           </Button.Group>
         </Modal.Footer>

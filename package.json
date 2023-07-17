@@ -22,9 +22,9 @@
     "expo-local-authentication": "~13.0.2",
     "expo-status-bar": "~1.4.2",
     "native-base": "^3.4.25",
-    "react": "18.1.0",
+    "react": "^18.2.0",
     "react-hook-form": "^7.42.1",
-    "react-native": "0.70.5",
+    "react-native": "^0.72.3",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-mask-input": "^1.2.2",
     "react-native-pager-view": "6.0.1",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@types/react": "~18.0.24",
+    "@types/react": "16.14.0",
     "@types/react-native": "~0.70.6",
     "@types/styled-components-react-native": "^5.2.1",
     "typescript": "^4.6.3"

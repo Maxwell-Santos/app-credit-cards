@@ -310,7 +310,6 @@ const style = StyleSheet.create({
 
   Selection: {
     color: '#a0a0a0',
-    border: 'none',
     fontSize: 16,
     flex: 1,
     height: 55,
