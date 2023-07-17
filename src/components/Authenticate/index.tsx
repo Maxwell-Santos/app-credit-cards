@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useTheme } from "styled-components";
 
 export function Authenticate({ children }) {
   //children é botão de entrar

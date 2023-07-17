@@ -1,4 +1,4 @@
-import { Icon, IconButton, NativeBaseProvider, View } from 'native-base';
+import { Icon, IconButton, NativeBaseProvider } from 'native-base';
 import { useEffect, useState } from 'react';
 import { Alert, StatusBar, StyleSheet, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -23,7 +23,6 @@ import { themeNB } from './src/theme/NativeBase';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { Authenticate } from './src/components/Authenticate';
 import * as LocalAuthentication from 'expo-local-authentication';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
   const [supportedBiometric, setSupportedBiometric] = useState(false)
@@ -92,7 +91,7 @@ export default function App() {
                     icon={<Icon as={FontAwesome} name={nameIcon} />}
                     onPress={toggle}
                     borderRadius="full" _icon={{
-                      color: "#c0c0c0",
+                      color: "#f8f8f8",
                       size: "lg"
                     }}
                   />
